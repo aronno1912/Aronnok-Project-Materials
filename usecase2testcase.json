@@ -1,0 +1,476 @@
+[
+    {
+        "usecase": {
+            "name": "Buy Plant",
+            "scenario": "A user wants to buy a plant from an online plant store.",
+            "actors": [
+                "User",
+                "Plant Store"
+            ],
+            "preconditions": [
+                "The user has access to the online plant store.",
+                "The user is logged into their account."
+            ],
+            "steps": [
+                "The user navigates through the plant catalog to explore available plants.",
+                "The user selects a specific plant they wish to purchase.",
+                "The user adds the selected plant to their shopping cart.",
+                "The user reviews the contents of their shopping cart, ensuring it includes the desired plant.",
+                "The user proceeds to the checkout process.",
+                "The user enters the required shipping information, such as address and contact details.",
+                "The user selects a preferred payment method (e.g., credit card, bKash, cash on delivery).",
+                "The user completes the purchase by confirming the order and making the payment.",
+                "The user receives an order confirmation with details of the purchased plant and the transaction."
+            ]
+        },
+        "testcases": [
+            {
+                "name": "Valid Plant Selection",
+                "description": "Verify that a user can successfully select and buy a plant.",
+                "input": {
+                    "selectedPlant": "RubyLime"
+                },
+                "expected": {
+                    "outcome": "Order successful",
+                    "status": "Processing"
+                }
+            },
+            {
+                "name": "Empty Cart Handling",
+                "description": "Verify that the system handles the case where a user tries to submit an empty cart.",
+                "input": {
+                    "selectedPlant": null
+                },
+                "expected": {
+                    "outcome": "Order failed",
+                    "status": "Failed"
+                }
+            },
+            {
+                "name": "Payment Authorization",
+                "description": "Verify that the user's payment method is properly authorized.",
+                "input": {
+                    "selectedPlant": "RubyLime",
+                    "paymentMethod": "bKash"
+                },
+                "expected": {
+                    "outcome": "Payment authorized",
+                    "status": "Payment Authorized"
+                }
+            },
+            {
+                "name": "Order Confirmation Email",
+                "description": "Verify that the user receives an order confirmation email after completing the purchase.",
+                "input": {
+                    "selectedPlant": "RubyLime",
+                    "paymentMethod": "bKash"
+                },
+                "expected": {
+                    "outcome": "User receives an order confirmation email",
+                    "status": "Processing"
+                }
+            }
+        ]
+    },
+    {
+        "usecase": {
+            "name": "Add Plant",
+            "scenario": "An admin wants to add a new plant to the online plant store.",
+            "actors": [
+                "Admin",
+                "Plant Store"
+            ],
+            "preconditions": [
+                "The admin has access to the admin panel of the online plant store.",
+                "The admin is logged into their admin account."
+            ],
+            "steps": [
+                "The admin navigates to the plant management section in the admin panel.",
+                "The admin selects the option to add a new plant.",
+                "The admin provides details of the new plant, such as name, description, price, and stock quantity.",
+                "The admin uploads images of the plant for display in the store.",
+                "The admin specifies the category or tags associated with the plant for better organization.",
+                "The admin reviews the entered information to ensure accuracy.",
+                "The admin submits the new plant details for addition to the plant catalog.",
+                "The admin receives a confirmation message indicating that the plant has been successfully added."
+            ]
+        },
+        "testcases": [
+            {
+                "name": "Valid Plant Addition",
+                "description": "Verify that an admin can successfully add a new plant to the catalog.",
+                "input": {
+                    "newPlantDetails": {
+                        "name": "Sun Cactus",
+                        "description": "Beautiful cactus with vibrant colors.",
+                        "price": 19.99,
+                        "stock": 50,
+                        "images": [
+                            "cactus_image1.jpg",
+                            "cactus_image2.jpg"
+                        ],
+                        "category": "Cactus",
+                        "tags": [
+                            "Cactus",
+                            "Thorny",
+                            "Hybrid"
+                        ]
+                    }
+                },
+                "expected": {
+                    "outcome": "Plant addition successful",
+                    "status": "Confirmed"
+                }
+            },
+            {
+                "name": "Incomplete Plant Details",
+                "description": "Verify that the system handles the case where an admin tries to add a plant with incomplete details.",
+                "input": {
+                    "newPlantDetails": {
+                        "name": "Moon Cactus",
+                        "description": "Cactus with no specified price and stock."
+                    }
+                },
+                "expected": {
+                    "outcome": "Plant addition failed",
+                    "status": "Failed"
+                }
+            },
+            {
+                "name": "Image Upload",
+                "description": "Verify that the admin can successfully upload images of the new plant.",
+                "input": {
+                    "newPlantDetails": {
+                        "name": "Moon Cactus",
+                        "description": "Resilient and drought-resistant, Moon Cactus thrives on neglect, adding a touch of untamed beauty to your home.",
+                        "price": 19.99,
+                        "stock": 30,
+                        "images": [
+                            "cactus_image1.jpg",
+                            "cactus_image2.jpg"
+                        ],
+                        "category": "Cactus",
+                        "tags": [
+                            "Cactus",
+                            "Thorny",
+                            "Hybrid"
+                        ]
+                    }
+                },
+                "expected": {
+                    "outcome": "Image upload successful",
+                    "status": "Images Uploaded"
+                }
+            },
+            {
+                "name": "Confirmation Message",
+                "description": "Verify that the admin receives a confirmation message after adding the new plant.",
+                "input": {
+                    "newPlantDetails": {
+                        "name": "Moon Cactus",
+                        "description": "Resilient and drought-resistant, Moon Cactus thrives on neglect, adding a touch of untamed beauty to your home.",
+                        "price": 19.99,
+                        "stock": 40,
+                        "images": [
+                            "cactus_image1.jpg",
+                            "cactus_image2.jpg"
+                        ],
+                        "category": "Cactus",
+                        "tags": [
+                            "Cactus",
+                            "Thorny",
+                            "Hybrid"
+                        ]
+                    }
+                },
+                "expected": {
+                    "outcome": "Admin receives confirmation message",
+                    "status": "Confirmed"
+                }
+            }
+        ]
+    },
+    {
+        "usecase": {
+            "name": "Sell Plant",
+            "scenario": "A user wants to sell a plant through the online plant store.",
+            "actors": [
+                "User",
+                "Plant Store"
+            ],
+            "preconditions": [
+                "The user has an active account on the online plant store.",
+                "The user is logged into their account."
+            ],
+            "steps": [
+                "The user navigates to the 'Sell Plant' section in their profile.",
+                "The user provides details of the plant they want to sell, such as name, description, and price.",
+                "The user uploads images of the plant for display in the store.",
+                "The user specifies the category associated with the plant for better organization.",
+                "The user reviews the entered information to ensure accuracy.",
+                "The user submits the plant details for listing in the online store.",
+                "The user receives a confirmation message indicating that the plant has been successfully listed for approval from admin."
+            ]
+        },
+        "testcases": [
+            {
+                "name": "Valid Plant Listing for approval",
+                "description": "Verify that a user can successfully initiate a plant sale request.",
+                "input": {
+                    "plantDetails": {
+                        "name": "Bronzestone",
+                        "description": "Resilient and drought-resistant, Bronzestone thrives on neglect, adding a touch of untamed beauty to your home.",
+                        "price": 14.99,
+                        "images": [
+                            "succulent_image1.jpg",
+                            "succulent_image2.jpg"
+                        ],
+                        "category": "Bonsai",
+                        "tags": [
+                            "Bonsai",
+                            "Small",
+                            "Indoor"
+                        ]
+                    }
+                },
+                "expected": {
+                    "outcome": "Plant request successful",
+                    "status": "Listed"
+                }
+            },
+            {
+                "name": "Incomplete Plant Details",
+                "description": "Verify that the system handles the case where a user tries to request a plant with incomplete details.",
+                "input": {
+                    "plantDetails": {
+                        "name": "Bronzestone",
+                        "description": "Bonsai with no specified price."
+                    }
+                },
+                "expected": {
+                    "outcome": "Plant request failed",
+                    "status": "Failed"
+                }
+            },
+            {
+                "name": "Image Upload",
+                "description": "Verify that the user can successfully upload images of the plant for sale.",
+                "input": {
+                    "plantDetails": {
+                        "name": "Bronzestone",
+                        "description": "Resilient and drought-resistant, Bronzestone thrives on neglect, adding a touch of untamed beauty to your home.",
+                        "price": 19.99,
+                        "images": [
+                            "bonsai_image1.jpg",
+                            "bonsai_image2.jpg"
+                        ],
+                        "category": "Bonsai",
+                        "tags": [
+                            "Bonsai",
+                            "Small",
+                            "Outdoor"
+                        ]
+                    }
+                },
+                "expected": {
+                    "outcome": "Image upload successful",
+                    "status": "Images Uploaded"
+                }
+            },
+            {
+                "name": "Confirmation Message",
+                "description": "Verify that the user receives a confirmation message after listing the plant for sale.",
+                "input": {
+                    "plantDetails": {
+                        "name": "Bronzestone",
+                        "description": "Resilient and drought-resistant, Bronzestone thrives on neglect, adding a touch of untamed beauty to your home.",
+                        "price": 19.99,
+                        "images": [
+                            "bonsai_image1.jpg",
+                            "bonsai_image2.jpg"
+                        ],
+                        "category": "Bonsai",
+                        "tags": [
+                            "Bonsai",
+                            "Small",
+                            "Indoor"
+                        ]
+                    }
+                },
+                "expected": {
+                    "outcome": "User receives confirmation message",
+                    "status": "Listed for approval"
+                }
+            }
+        ]
+    },
+    {
+        "usecase": {
+            "name": "Approve Plant Selling Request",
+            "scenario": "An admin needs to review and approve a user's request to sell a plant on the online plant store.",
+            "actors": [
+                "Admin",
+                "Plant Store"
+            ],
+            "preconditions": [
+                "The admin has access to the admin panel of the online plant store.",
+                "A user has submitted a request to sell a plant."
+            ],
+            "steps": [
+                "The admin logs into the admin panel.",
+                "The admin navigates to the 'Pending Requests' section.",
+                "The admin views details of the pending plant selling request, including plant information and user details.",
+                "The admin reviews the uploaded images of the plant.",
+                "The admin evaluates the completeness and accuracy of the information provided by the user.",
+                "The admin decides whether to approve or reject the plant selling request.",
+                "If approved, the plant is listed in the online store; if rejected, the user is notified of the decision."
+            ]
+        },
+        "testcases": [
+            {
+                "name": "Approve Plant Selling Request",
+                "description": "Verify that the admin can successfully approve a user's request to sell a plant.",
+                "input": {
+                    "requestDetails": {
+                        "user": "john_doe@example.com",
+                        "plantDetails": {
+                            "name": "Spider Plant",
+                            "description": "Spider plant with hanging clusters of baby plants.",
+                            "price": 12.99,
+                            "images": [
+                                "spider_plant_image1.jpg",
+                                "spider_plant_image2.jpg"
+                            ],
+                            "category": "Indoor",
+                            "tags": [
+                                "Spider Plant",
+                                "Hanging",
+                                "Indoor"
+                            ]
+                        }
+                    }
+                },
+                "expected": {
+                    "outcome": "Request approval successful",
+                    "status": "Approved"
+                }
+            },
+            {
+                "name": "Reject Plant Selling Request",
+                "description": "Verify that the admin can successfully reject a user's request to sell a plant.",
+                "input": {
+                    "requestDetails": {
+                        "user": "jane_smith@example.com",
+                        "plantDetails": {
+                            "name": "Bamboo Plant",
+                            "description": "Bamboo plant known for its fast growth.",
+                            "price": 15.99,
+                            "images": [
+                                "bamboo_plant_image1.jpg",
+                                "bamboo_plant_image2.jpg"
+                            ],
+                            "category": "Outdoor Plants",
+                            "tags": [
+                                "Bamboo Plant",
+                                "Fast-growing",
+                                "Outdoor"
+                            ]
+                        }
+                    }
+                },
+                "expected": {
+                    "outcome": "Request rejection successful",
+                    "status": "Rejected"
+                }
+            },
+            {
+                "name": "Incomplete Information",
+                "description": "Verify that the admin can handle the case where the user's request has incomplete information.",
+                "input": {
+                    "requestDetails": {
+                        "user": "mary_jones@example.com",
+                        "plantDetails": {
+                            "name": "Hazlemount",
+                            "description": "Hazlemount with no specified price."
+                        }
+                    }
+                },
+                "expected": {
+                    "outcome": "Request rejection due to incomplete information",
+                    "status": "Rejected"
+                }
+            }
+        ]
+    },
+    {
+        "usecase": {
+            "name": "Place Bid on a Plant",
+            "scenario": "A user wants to participate in a bidding process for a specific plant available on the online plant store.",
+            "actors": [
+                "User",
+                "Plant Store"
+            ],
+            "preconditions": [
+                "The user is registered and logged into their account.",
+                "The online plant store is conducting a bidding event for the specified plant."
+            ],
+            "steps": [
+                "The user navigates to the 'Bidding Events' section of the online plant store.",
+                "The user selects the plant for which they want to place a bid.",
+                "The user views detailed information about the selected plant, including images and current highest bid.",
+                "The user enters their bid amount in the provided input field.",
+                "The user submits the bid for review.",
+                "The system validates the bid amount and ensures it meets the minimum bid increment criteria.",
+                "If the bid is valid, it is recorded, and the user is notified of the successful bid placement; if not, the user is notified of the error.",
+                "The user can view their placed bids and the status of each bid in their account."
+            ]
+        },
+        "testcases": [
+            {
+                "name": "Place Valid Bid",
+                "description": "Verify that the user can successfully place a valid bid on a specific plant.",
+                "input": {
+                    "selectedPlant": "Hazlemount",
+                    "bidAmount": 20.5
+                },
+                "expected": {
+                    "outcome": "Bid placement successful",
+                    "status": "Valid Bid"
+                }
+            },
+            {
+                "name": "Place Invalid Bid (Below Minimum Increment)",
+                "description": "Verify that the system rejects a bid that does not meet the minimum bid increment criteria.",
+                "input": {
+                    "selectedPlant": "Hazlemount",
+                    "bidAmount": 5.0
+                },
+                "expected": {
+                    "outcome": "Bid placement failed",
+                    "status": "Invalid Bid (Below Minimum Increment)"
+                }
+            },
+            {
+                "name": "Place Invalid Bid (Equal to Current Highest Bid)",
+                "description": "Verify that the system rejects a bid that is equal to the current highest bid.",
+                "input": {
+                    "selectedPlant": "Hazlemount",
+                    "bidAmount": 20.5
+                },
+                "expected": {
+                    "outcome": "Bid placement failed",
+                    "status": "Invalid Bid (Equal to Current Highest Bid)"
+                }
+            },
+            {
+                "name": "View Placed Bids",
+                "description": "Verify that the user can view their placed bids and the status of each bid in their account.",
+                "input": {},
+                "expected": {
+                    "outcome": "Viewing placed bids successful",
+                    "status": "Bids Displayed"
+                }
+            }
+        ]
+    }
+]
